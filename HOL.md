@@ -30,7 +30,7 @@ The following is required to complete this hands-on lab:
 - [GIT Version Control System](http://git-scm.com/download)
 - A Windows Azure subscription with the Web Sites Preview enabled - you can sign up for free trial [here](http://bit.ly/WindowsAzureFreeTrial)
 
-> **Note:** This lab was designed using Windows 8.
+> **Note:** This lab was designed to use Windows 8 Operating System.
 
 <a name="Setup"/>
 ### Setup ###
