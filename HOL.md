@@ -30,7 +30,7 @@ The following is required to complete this hands-on lab:
 - [GIT Version Control System](http://git-scm.com/download)
 - A Windows Azure subscription with the Web Sites Preview enabled - you can sign up for free trial [here](http://bit.ly/WindowsAzureFreeTrial)
 
-> **Note:** This lab was designed using Windows 8.
+> **Note:** This lab was designed to use Windows 8 Operating System.
 
 <a name="Setup"/>
 ### Setup ###
@@ -202,19 +202,31 @@ In this exercise you will create a new web site from the Windows Azure Managemen
 <a name="Ex1Task2" />
 #### Task 2 – Configuring the Database Server ####
 
-You will need a SQL Database server for storing the application database. You can view the SQL Database servers from your subscription in the Windows Azure Management portal at **Sql Databases** | **Server** | **Server's Dashboard**. If you do not have a server created, you can create one using the **Add** button on the command bar. Make note of the **server name and URL, administrator login name and password**, as you will use them in the next tasks. Do not create the database yet, as it will be created by Entity Framework when running the application.
+1. You will need a SQL Database server for storing the application database. You can view the SQL Database servers from your subscription in the Windows Azure Management portal at **Sql Databases** | **Server** | **Server's Dashboard**. If you do not have a server created, you can create one using the **Add** button on the command bar. Take note of the **server name and URL, administrator login name and password**, as you will use them in the next tasks. Do not create the database yet, as it will be created by Entity Framework in a later stage.
 
-![SQL Database Server Dashboard](images/sql-database-server-dashboard.png?raw=true "SQL Database Server Dashboard")
+	![SQL Database Server Dashboard](images/sql-database-server-dashboard.png?raw=true "SQL Database Server Dashboard")
 
-_SQL Database Server Dashboard_
+	_SQL Database Server Dashboard_
 
-> **Note:** Notice that as you are using Entity Framework Code First approach, the database will be created the first time you run the application.
-> By default, it creates a SQL Database with the default settings:
->
-> - Max Size: _1GB_
-> - Edition: _WEB_
-> 
-> You can update the SQL Database database settings within **Databases** section in the [Windows Azure Management Portal](https://manage.windowsazure.com/).
+	> **Note:** Notice that as you are using Entity Framework Code First approach, the database will be created automatically.
+	> By default, it creates a SQL Database with the default settings:
+	>
+	> - Max Size: _1GB_
+	> - Edition: _WEB_
+	> 
+	> You can update the SQL Database database settings within **Databases** section in the [Windows Azure Management Portal](https://manage.windowsazure.com/).
+
+1. In the next task you will test the database connection from Visual Studio, for that reason you need to include your local IP address in the server's list of **Allowed IP Addresses**. To do that, click **Configure**, select the IP address from **Current Client IP Address** and paste it on the **Start IP Address** and **End IP Address** text boxes and click the ![add-client-ip-address-ok-button](images/add-client-ip-address-ok-button.png?raw=true) button.
+
+	![Adding Client IP Address](images/add-client-ip-address.png?raw=true)
+
+	_Adding Client IP Address_
+
+1. Once the **Client IP Address** is added to the allowed IP addresses list, click on **Save** to confirm the changes.
+
+	![Confirm Changes](images/add-client-ip-address-confirm.png?raw=true)
+
+	_Confirm Changes_
 
 <a name="Ex1Task3" />
 #### Task 3 – Publishing an ASP.NET MVC 4 Application using Web Deploy ####
