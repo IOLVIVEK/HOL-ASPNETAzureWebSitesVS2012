@@ -54,7 +54,7 @@ This hands-on lab includes the following exercises:
 - [Exercise 2: Publishing an MVC 4 Application using Git](#Exercise2)
 
 <a name="GettingStarted" />
-### Getting Started: Creating an MVC 4 Appliction using Entity Framework Code First ###
+### Getting Started: Creating an MVC 4 Application using Entity Framework Code First ###
 
 In this section, you will create a simple ASP.NET MVC 4 web application, using MVC 4 scaffolding with Entity Framework code first to create the CRUD methods.
 
@@ -145,7 +145,6 @@ In this exercise you will create a new web site from the Windows Azure Managemen
 <a name="Ex1Task1" />
 #### Task 1 – Creating a New Web Site from the Windows Azure Portal ####
 
-
 1. Go to the [Windows Azure Management Portal](https://manage.windowsazure.com/) and sign in using the Microsoft credentials associated with your subscription.
 
 	![Log on to Windows Azure portal](images/login.png?raw=true "Log on to Windows Azure portal")
@@ -184,7 +183,6 @@ In this exercise you will create a new web site from the Windows Azure Managemen
 	
 	_Opening the Web Site management pages_
 
-
 1. In the **Dashboard** page, under the **quick glance** section, click the **Download publish profile** link.
 
 	> **Note:** The _publish profile_ contains all of the information required to publish a web application to a Windows Azure website for each enabled publication method. The publish profile contains the URLs, user credentials and database strings required to connect to and authenticate against each of the endpoints for which a publication method is enabled. **Microsoft WebMatrix 2**, **Microsoft Visual Web Developer** and **Microsoft Visual Studio 2012** support reading publish profiles to automate configuration of these programs for publishing web applications to Windows Azure websites. 
@@ -202,19 +200,11 @@ In this exercise you will create a new web site from the Windows Azure Managemen
 <a name="Ex1Task2" />
 #### Task 2 – Configuring the Database Server ####
 
-1. You will need a SQL Database server for storing the application database. You can view the SQL Database servers from your subscription in the Windows Azure Management portal at **Sql Databases** | **Server** | **Server's Dashboard**. If you do not have a server created, you can create one using the **Add** button on the command bar. Take note of the **server name and URL, administrator login name and password**, as you will use them in the next tasks. Do not create the database yet, as it will be created by Entity Framework in a later stage.
+1. You will need a SQL Database server for storing the application database. You can view the SQL Database servers from your subscription in the Windows Azure Management portal at **Sql Databases** | **Server** | **Server's Dashboard**. If you do not have a server created, you can create one using the **Add** button on the command bar. Take note of the **server name and URL, administrator login name and password**, as you will use them in the next tasks. Do not create the database yet, as it will be created in a later stage.
 
 	![SQL Database Server Dashboard](images/sql-database-server-dashboard.png?raw=true "SQL Database Server Dashboard")
 
 	_SQL Database Server Dashboard_
-
-	> **Note:** Notice that as you are using Entity Framework Code First approach, the database will be created automatically.
-	> By default, it creates a SQL Database with the default settings:
-	>
-	> - Max Size: _1GB_
-	> - Edition: _WEB_
-	> 
-	> You can update the SQL Database database settings within **Databases** section in the [Windows Azure Management Portal](https://manage.windowsazure.com/).
 
 1. In the next task you will test the database connection from Visual Studio, for that reason you need to include your local IP address in the server's list of **Allowed IP Addresses**. To do that, click **Configure**, select the IP address from **Current Client IP Address** and paste it on the **Start IP Address** and **End IP Address** text boxes and click the ![add-client-ip-address-ok-button](images/add-client-ip-address-ok-button.png?raw=true) button.
 
@@ -291,7 +281,7 @@ In this exercise you will create a new web site from the Windows Azure Managemen
 
 	_Publishing the web application_
 
-1. Once the publishing process finishes, your default brorser will open the published web site.
+1. Once the publishing process finishes, your default browser will open the published web site.
 
 	![Application published to Windows Azure](images/application-published-to-windows-azure.png?raw=true "Application published to Windows Azure")
 
@@ -379,7 +369,7 @@ If you did not executed exercise 1 you can still perform this exercise by deploy
 
 1. Press **CTRL+SHIFT+B** to build the solution and download the NuGet package dependencies.
 
-1. Open Web.config and update the **PersonContext** connection string using the one obtained from [exercise 1 - task 3](#Ex1Task3).
+1. Open Web.config and update the **PersonContext** connection string using the one obtained from [Exercise 1 - Task 3](#Ex1Task3). You can also use the following connection string replacing the placeholders.
 
 	````XML
 	<connectionStrings>
@@ -389,9 +379,7 @@ If you did not executed exercise 1 you can still perform this exercise by deploy
 	</connectionStrings>
 	````
 
-1. Open a new **Git Bash** console and insert the following commands. Update the _[YOUR-APPLICATION-PATH]_ placeholder with the path of the MVC 4 solution you've created in [exercise 1](#Exercise1). 
-
-	> **Note:** As explained in the exercise introduction, you can also get a solution to deploy from the **Source\Assets** folder of this lab.
+1. Open a new **Git Bash** console and insert the following commands. Update the _[YOUR-APPLICATION-PATH]_ placeholder with the path of the MVC 4 solution you've created in [Exercise 1](#Exercise1). 
 	
 	<!-- mark:1-4 -->
 	````CommandPrompt
@@ -405,7 +393,7 @@ If you did not executed exercise 1 you can still perform this exercise by deploy
 
 	_Git initialization and first commit_
 
-1. Push your web site to the remote **Git** repository by running the following command. Replace the placeholder with the URL you obtained from the Windows Azure Management Portal. You will be promted for your deployment password.
+1. Push your web site to the remote **Git** repository by running the following command. Replace the placeholder with the URL you obtained from the Windows Azure Management Portal. You will be prompted for your deployment password.
 
 	<!-- mark:1-2 -->
 	````CommandPrompt
@@ -441,7 +429,6 @@ If you did not executed exercise 1 you can still perform this exercise by deploy
 
 	_Application Running in Windows Azure_
 	
-
 1. Go to **/Person** to verify that the Persons views are working as expected. You can try adding a new Person to verify it is successfully saved to the database.
 
 	![Application Running](images/application-running.png?raw=true "Application Running")
