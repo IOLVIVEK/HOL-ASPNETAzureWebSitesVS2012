@@ -35,4 +35,4 @@ If you find any issues or opportunties for improving this hands-on lab, fix them
 
 ### Reporting Issues ###
 
-If you find any issues with this hands-on lab that you can't fix, feel free to report them in the [issues](https://github.com/WindowsAzure-TrainingKit/HOL-ASPNETWebAppsWithWAZWebSitesAndVS2012/issues) section of this repository.
+If you find any issues with this hands-on lab that you can't fix, feel free to report them in the [issues](https://github.com/WindowsAzure-TrainingKit/HOL-ASPNETAzureWebSitesVS2012/issues) section of this repository.
