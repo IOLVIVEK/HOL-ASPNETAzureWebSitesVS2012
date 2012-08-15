@@ -1,4 +1,4 @@
-﻿<a name="Title"></a>
+<a name="Title"></a>
 # Building and Publishing ASP.NET Applications with Windows Azure Web Sites and Visual Studio 2012 #
 
 ---
@@ -28,7 +28,7 @@ The following is required to complete this hands-on lab:
 
 - [Microsoft Visual Studio 2012](http://msdn.microsoft.com/vstudio/products/)
 - [GIT Version Control System](http://git-scm.com/download)
-- A Windows Azure subscription with the Web Sites Preview enabled - [sign up for free trial](http://aka.ms/WATK-FreeTrial)
+- A Windows Azure subscription with the Web Sites Preview enabled - [sign up for a free trial](http://aka.ms/WATK-FreeTrial)
 
 > **Note:** This lab was designed to use Windows 8 Operating System.
 
@@ -103,11 +103,7 @@ In this section, you will create a simple ASP.NET MVC 4 web application, using M
 	}
 	````
 
-1. Click **Build | Build MVC4Sample.Web** to save the changes and build the project.
-
-	![Building the application](images/visual-studio-build-application.png?raw=true "Building the application")
-
-	_Building the Application_
+1. **Build MVC4Sample.Web** by using the **Ctrl + Shift + B** keyboard shortcut which will save the changes and build the project.
 
 1. In the Solution Explorer, right-click the controllers folder and select **Add | Controller**. 
 
@@ -129,7 +125,33 @@ In this section, you will create a simple ASP.NET MVC 4 web application, using M
 
 1. Open **PersonController** class. Notice that the full CRUD action methods have been generated automatically. 
 
-	![Inside the Person controller](images/person-controller-code.png?raw=true "Inside the Person controller")
+	````C#
+	//
+	// POST: /Person/Create
+	[HttpPost]
+	public ActionResult Create(Person person)
+	{
+	     if (ModelState.IsValid)
+	     {
+	          db.People.Add(person);
+	          db.SaveChanges();
+	          return RedirectToAction("Index");
+	     }
+	     return View(person);
+	}
+	
+	//
+	// GET: /Person/Edit/5
+	public ActionResult Edit(int id = 0)
+	{
+	     Person person = db.People.Find(id);
+	     if (person == null)
+	     { 
+	          return HttpNotFound();
+	     }
+	     return View(person);
+	}
+	````
 
 	_Inside the Person controller_
 
@@ -233,19 +255,13 @@ In this exercise you will create a new web site from the Windows Azure Managemen
 
 	_Importing publish profile_
 
-1. After importing the profile, click **Next**.
+1. Click **Validate Connection**. Once Validation is complete click **Next**.
 
-1. Click **Validate Connection**.
+	> **Note:** Validation is complete once you see a green checkmark appear next to the Validate Connection button.
 
 	![Validating connection](images/validating-connection.png?raw=true "Validating connection")
 
 	_Validating connection_
-
-1. After validating the connection, click **Next**.
-
-	![Connection validated](images/connection-validated.png?raw=true "Connection validated")
-
-	_Connection validated_
 
 1. In the **Settings** page, under the **Databases** section, click the button next to the **PersonContext** textbox.
 
@@ -425,7 +441,7 @@ If you did not executed exercise 1 you can still perform this exercise by deploy
 
 1. If the application was successfully deployed, you will see the ASP.NET MVC 4 template's default home page.
 
-	![Application Running in Windows Azure](images/application-running-in-windows-azure.png?raw=true "Application Running in Windows Azure")
+	![Application Running in Windows Azure](images/application-published-to-windows-azure.png?raw=true "Application Running in Windows Azure")
 
 	_Application Running in Windows Azure_
 	
