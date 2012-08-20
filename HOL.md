@@ -32,7 +32,7 @@ The following is required to complete this hands-on lab:
 
 > **Note:** This lab was designed to use Windows 8 Operating System.
 
-<a name="Setup"/>
+<a name="Setup"></a>
 ### Setup ###
 
 In order to execute the exercises in this hands-on lab you need to set up your environment.
