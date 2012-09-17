@@ -16,7 +16,7 @@
   <Description>In this hands-on lab you will explore the basic elements of the Windows Azure Web Sites service by creating a simple ASP.NET MVC 4 application, which uses scaffolding to automatically generate the baseline of your application's CRUD (Create, Read, Update and Delete). Then, you will deploy it using Web Deploy from Visual Studio 2012 and Git commit.</Description>  
   <Document ConversionType="Html">.\HOL.md</Document>
   <Title>Building and Publishing ASP.NET Applications with Windows Azure Web Sites and Visual Studio 2012</Title>
-  <Version>1.0.0</Version>
+  <Version>1.0.1</Version>
   <Source>.\Source</Source>
   <DependencyChecker>.\source\Setup\Dependencies.depi</DependencyChecker>
   <CustomProperties>
