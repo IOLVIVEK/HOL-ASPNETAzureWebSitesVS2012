@@ -11,7 +11,6 @@ namespace MVC4Sample.Web.Models
 
         public string FirstName { get; set; }
 
-        public string LastName { get; set; } 
-
+        public string LastName { get; set; }      
     }
 }

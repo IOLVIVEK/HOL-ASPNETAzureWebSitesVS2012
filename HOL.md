@@ -1,4 +1,4 @@
-<a name="Title"></a>
+﻿<a name="Title"></a>
 # Building and Publishing ASP.NET Applications with Windows Azure Web Sites and Visual Studio 2012 #
 
 ---
@@ -14,7 +14,7 @@ Starting from a simple model class and without writing a single line of code, yo
 <a name="Objectives"></a>
 ### Objectives ###
 
-In this Hands-on Lab, you will learn how to:
+In this hands-on lab, you will learn how to:
 
 - Create a Web Site from the Windows Azure Management Portal
 - Use Microsoft Visual Studio 2012 to build a new ASP.NET MVC 4 application
@@ -37,9 +37,9 @@ The following is required to complete this hands-on lab:
 
 In order to execute the exercises in this hands-on lab you need to set up your environment.
 
-1. Open a Windows Explorer window and browse to the lab’s **Source** folder.
+1. Open a Windows Explorer window and browse to the lab's **Source** folder. 
 
-1. Right click the **Setup.cmd** file and click **Run as administrator**. This will launch the setup process that will check the necessary dependencies.
+1. Right-click the **Setup.cmd** file and click **Run as administrator**. This will launch the setup process that will configure your environment and check the dependencies.
 
 >**Note:** Make sure you have checked all the dependencies for this lab before running the setup. 
 
@@ -79,9 +79,9 @@ In this section, you will create a simple ASP.NET MVC 4 web application, using M
 
 	_Choosing Internet Application_
 
-1. In the Solution Explorer, right-click **Models** and select **Add | Class** to create a simple class person (POCO). Name it _Person_ and click **Add**.
+1. In the Solution Explorer, right-click **Models** and select **Add | Class** to create a person class (POCO). Name it _Person.cs_ and click **Add**.
 
-1. Open the **Person** class and insert the following three attributes.
+1. Open the **Person** class and insert the following three properties.
 
 	<!-- mark:10-14 -->
 	````C#
@@ -98,32 +98,33 @@ In this section, you will create a simple ASP.NET MVC 4 web application, using M
 
 			public string FirstName { get; set; }
 
-			public string LastName { get; set; }        
+			public string LastName { get; set; }
 		}
 	}
 	````
 
 1. **Build MVC4Sample.Web** by using the **Ctrl + Shift + B** keyboard shortcut which will save the changes and build the project.
 
-1. In the Solution Explorer, right-click the controllers folder and select **Add | Controller**. 
+1. In the Solution Explorer, right-click the **Controllers** folder and select **Add | Controller**. 
 
 1. Name the controller _PersonController_ and complete the **Scaffolding options** with the following values.	
 	- In the **Template** drop-down list, select the **MVC Controller with read/write actions and views, using Entity Framework** option.
 	- In the **Model class** drop-down list, select the **Person** class.
-	- In the **Data Context class** list, select **\<New data context...\>**. In the dialog box displayed, set the name to **PersonContext** and click **OK**.
+	- In the **Data Context class** list, select **\<New data context...\>**. In the dialog box displayed, replace the data context class type with **MVC4Sample.Web.Models.PersonContext** and click **OK**.
+
 	- In the **Views** drop-down list, make sure that **Razor** is selected.
 
 	![Adding the Person controller with scaffolding](images/add-person-controller.png?raw=true "Adding the Person controller with scaffolding")
 
 	_Adding the Person controller with scaffolding_
 	
-1. Click **Add** to create the new controller for **Person** with scaffolding. You have now generated the controller actions as well as the views. 
+1. Click **Add** to create the new controller for **Person** with scaffolding. You have generated the controller actions as well as the views. 
 		
 	![After creating the Person controller with scaffolding ](images/person-scaffolding.png?raw=true "After creating the Person controller with scaffolding")
 
 	_After creating the Person controller with scaffolding_
 
-1. Open **PersonController** class. Notice that the full CRUD action methods have been generated automatically. 
+1. Open the **PersonController.cs** file in the **Controllers** folder. Notice that the CRUD action methods have been generated automatically. 
 
 	````C#
 	//
@@ -162,16 +163,16 @@ In this section, you will create a simple ASP.NET MVC 4 web application, using M
 <a name="Exercise1"></a>
 ### Exercise 1: Publishing an MVC 4 Application using Web Deploy ###
 
-In this exercise you will create a new web site from the Windows Azure Management Portal and publish the application you obtained in the Getting Started, taking advantage of the Web Deploy publishing feature provided by Windows Azure.
+In this exercise, you will create a new web site in the Windows Azure Management Portal and publish the application you obtained in the Getting Started section, taking advantage of the Web Deploy publishing feature provided by Windows Azure.
 
 <a name="Ex1Task1"></a>
 #### Task 1 – Creating a New Web Site from the Windows Azure Portal ####
 
 1. Go to the [Windows Azure Management Portal](https://manage.windowsazure.com/) and sign in using the Microsoft credentials associated with your subscription.
 
-	![Log on to Windows Azure portal](images/login.png?raw=true "Log on to Windows Azure portal")
+	![Log on to Windows Azure portal](images/login.png?raw=true "Log on to the Windows Azure portal")
 
-	_Log on to Windows Azure Management Portal_
+	_Log on to the Windows Azure Management Portal_
 
 1. Click **New** on the command bar.
 
@@ -179,7 +180,7 @@ In this exercise you will create a new web site from the Windows Azure Managemen
 
 	_Creating a new Web Site_
 
-1. Click **Web Site** and then **Quick Create**. Provide an available URL for the new web site and click **Create Web Site**.
+1. Click **Compute**, **Web Site** and then **Quick Create**. Provide an available URL for the new web site and click **Create Web Site**.
 
 	> **Note:** A Windows Azure Web Site is the host for a web application running in the cloud that you can control and manage. The Quick Create option allows you to deploy a completed web application to the Windows Azure Web Site from outside the portal. It does not include steps for setting up a database.
 
@@ -188,8 +189,20 @@ In this exercise you will create a new web site from the Windows Azure Managemen
 	_Creating a new Web Site using Quick Create_
 
 1. Wait until the new **Web Site** is created.
+	
+	> **Note:** By default, Windows Azure provides domains at _azurewebsites.net_, but also gives you the possibility to set custom domains using the Windows Azure Management Portal. However, you can only manage custom domains if you are using certain Web Site modes.
+	
+	> Windows Azure offers 3 modes for users to run their web sites - Free, Shared, and Reserved. In Free and Shared mode, all web sites run in a multi-tenant environment and have quotas for CPU, Memory, and Network usage. You can mix and match which sites are Free (strict quotas) vs. Shared (more relaxed quotas). The maximum number of free sites may vary with your plan. The Reserved mode applies to ALL of your sites and makes them run on dedicated virtual machines that correspond to the standard Azure compute resources. You can find the Web Sites Mode configuration in the **Scale** menu of your Web Site.
 
-1. Once the Web Site is created click the link under the **URL** column. Check that the new Web Site is working.
+	> ![Web Site Modes](images/web-site-modes.png?raw=true "Web Site Modes")
+
+	> If you are using **Shared** or **Reserved** mode, you will be able to manage custom domains for your Web Site. To do so, go to the **Configure** menu of your Web Site and click **Manage Domains**.
+
+	> ![Manage Domains](images/manage-domains.png?raw=true "Manage Domains")
+
+	> ![Manage Custom Domains](images/manage-custom-domains.png?raw=true "Manage Custom Domains")
+
+1. Once the Web Site is created, click the link under the **URL** column. Check that the new Web Site is working.
 
 	![Browsing to the new web site](images/navigate-website.png?raw=true "Browsing to the new web site")
 
@@ -222,19 +235,20 @@ In this exercise you will create a new web site from the Windows Azure Managemen
 <a name="Ex1Task2"></a>
 #### Task 2 – Configuring the Database Server ####
 
-1. You will need a SQL Database server for storing the application database. You can view the SQL Database servers from your subscription in the Windows Azure Management portal at **Sql Databases** | **Server** | **Server's Dashboard**. If you do not have a server created, you can create one using the **Add** button on the command bar. Take note of the **server name and URL, administrator login name and password**, as you will use them in the next tasks. Do not create the database yet, as it will be created in a later stage.
+1. You will need a SQL Database server for storing the application database. You can view the SQL Database servers from your subscription in the portal at **Sql Databases** | **Servers**. If you do not have a server created, you can create one using the **Add** button at the bottom of the page. Make note of the server **NAME**, **MANAGE URL**, and **ADMINISTRATOR LOGIN**, and obtain the server's password, which is not shown in the portal. You will use this information next.
+Do not create the database yet, as it will be created by Entity Framework when running the application.
 
 	![SQL Database Server Dashboard](images/sql-database-server-dashboard.png?raw=true "SQL Database Server Dashboard")
 
 	_SQL Database Server Dashboard_
 
-1. In the next task you will test the database connection from Visual Studio, for that reason you need to include your local IP address in the server's list of **Allowed IP Addresses**. To do that, click **Configure**, select the IP address from **Current Client IP Address** and paste it on the **Start IP Address** and **End IP Address** text boxes and click the ![add-client-ip-address-ok-button](images/add-client-ip-address-ok-button.png?raw=true) button.
+1. In the next task, you will test the database connection from Visual Studio. For that reason, you need to include your local IP address in the server's list of **Allowed IP Addresses**. To do that, click **Configure**, and then click the ![add-client-ip-address-ok-button](images/add-client-ip-address-ok-button.png?raw=true) button next to the the IP address labeled **CURRENT CLIENT IP ADDRESS**.
 
 	![Adding Client IP Address](images/add-client-ip-address.png?raw=true)
 
 	_Adding Client IP Address_
 
-1. Once the **Client IP Address** is added to the allowed IP addresses list, click on **Save** to confirm the changes.
+1. Once the **Client IP Address** is added to the allowed IP addresses list, click **Save** to confirm the changes.
 
 	![Confirm Changes](images/add-client-ip-address-confirm.png?raw=true)
 
@@ -249,15 +263,15 @@ In this exercise you will create a new web site from the Windows Azure Managemen
 
 	_Publishing the web site_
 
-1. Import the publish profile you saved in the first task.
+1. In the **Profile** page, click **Import** and select the profile settings file you downloaded earlier in this exercise.
 
 	![Importing the publish profile](images/importing-the-publish-profile.png?raw=true "Importing the publish profile")
 
 	_Importing publish profile_
 
-1. Click **Validate Connection**. Once Validation is complete click **Next**.
+1. In the **Connection** page, leave the imported values and click **Validate Connection**. Once the validation is completed, click **Next**.
 
-	> **Note:** Validation is complete once you see a green checkmark appear next to the Validate Connection button.
+	> **Note:** Validation is completed once you see a green checkmark appearing next to the **Validate Connection** button.
 
 	![Validating connection](images/validating-connection.png?raw=true "Validating connection")
 
@@ -270,22 +284,22 @@ In this exercise you will create a new web site from the Windows Azure Managemen
 	_Web deploy configuration_
 
 1. Configure the database connection as follows:
-	* In the **Server name** type your SQL Database server URL using the _tcp:_ prefix.
-	* In **User name** type your server administrator login name.
-	* In **Password** type your server administrator login password.
+	* In the **Server name**, type your SQL Database server URL. This is the domain name portion of the **MANAGE URL** copied earlier (for example, given _https://[yourserver].database.windows.net/_ as the MANAGE URL, enter _[yourserver].database.windows.net_).
+	* In **User name**, type your server administrator login name.
+	* In **Password**, type your server administrator login password.
 	* Type a new database name, for example: _MVC4SampleDB_.
 
 	![Configuring destination connection string](images/configuring-destination-connection-string.png?raw=true "Configuring destination connection string")
 
 	_Configuring destination connection string_
 
-1. Then click **OK**. When prompted to create the database click **Yes**.
+1. Then, click **OK**. When prompted to create the database, click **Yes**.
 
 	![Creating the database](images/creating-the-database.png?raw=true "Creating the database string")
 
 	_Creating the database_
 
-1. Copy the connection string from Person Context to use it later. Then click **Next**.
+1. Copy the connection string value from **PersonContext** to use it later. Then click **Next**.
 
 	![Connection string pointing to SQL Database](images/sql-database-connection-string.png?raw=true "Connection string pointing to SQL Database")
 
@@ -297,7 +311,7 @@ In this exercise you will create a new web site from the Windows Azure Managemen
 
 	_Publishing the web application_
 
-1. Once the publishing process finishes, your default browser will open the published web site.
+1. Once the publishing process finishes, your default browser will open the published web site. Verify that the web site was successfully published in Windows Azure.
 
 	![Application published to Windows Azure](images/application-published-to-windows-azure.png?raw=true "Application published to Windows Azure")
 
@@ -333,7 +347,7 @@ If you did not executed exercise 1 you can still perform this exercise by deploy
 
 	_Creating a new Web Site_
 
-1. Click **Web Site** and then **Quick Create**. Provide an available URL for the new web site and click **Create Web Site**.
+1. Click **Compute**, **Web Site** and then **Quick Create**. Provide an available URL for the new web site and click **Create Web Site**.
 
 	> **Note:** A Windows Azure Web Site is the host for a web application running in the cloud that you can control and manage. The Quick Create option allows you to deploy a completed web application to the Windows Azure Web Site from outside the portal. It does not include steps for setting up a database.
 
@@ -353,12 +367,12 @@ If you did not executed exercise 1 you can still perform this exercise by deploy
 
 	_Web site running_
 
-<a name="Ex3Task2"></a>  
+<a name="Ex2Task2"></a>  
 #### Task 2 – Setting up Git Publishing ####
 
 1. Go back to the Windows Azure Management Portal. In the **Web Sites** section, locate the web site you created in the previous task and open its dashboard. To do this, click the web site's **Name**. 
 
-1. At the bottom of the page, click **Set up Git publishing** link.
+1. Under the quick glance section, click **Set up Git publishing** link.
 
 	![Set up Git publishing](images/set-up-git-publishing.png?raw=true "Set up Git publishing")
 
@@ -374,11 +388,11 @@ If you did not executed exercise 1 you can still perform this exercise by deploy
 
 	![Git repository ready](images/git-repository-ready.png?raw=true "Git repository ready")
 
-	_Git repository ready_
+	_Git repository is ready_
 
 1. Copy the **Git URL** value. You will use it later in this exercise.
 
-<a name="Ex3Task3"></a>  
+<a name="Ex2Task3"></a>  
 #### Task 3 – Pushing the Application to Widows Azure using Git ####
 
 1. Open the solution you have obtained in [exercise 1](#Exercise1) with Visual Studio. Alternatively, you can open the **MVC4Sample.Web** solution located in the **Source\Assets** folder of this lab.
