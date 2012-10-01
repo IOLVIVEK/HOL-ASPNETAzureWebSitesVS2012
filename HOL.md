@@ -111,7 +111,6 @@ In this section, you will create a simple ASP.NET MVC 4 web application, using M
 	- In the **Template** drop-down list, select the **MVC Controller with read/write actions and views, using Entity Framework** option.
 	- In the **Model class** drop-down list, select the **Person** class.
 	- In the **Data Context class** list, select **\<New data context...\>**. In the dialog box displayed, replace the data context class type with **MVC4Sample.Web.Models.PersonContext** and click **OK**.
-
 	- In the **Views** drop-down list, make sure that **Razor** is selected.
 
 	![Adding the Person controller with scaffolding](images/add-person-controller.png?raw=true "Adding the Person controller with scaffolding")
