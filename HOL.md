@@ -9,7 +9,7 @@ Web site publication and deployment has never been easier in Windows Azure. Usin
 
 In this hands-on lab, you will explore the basic elements of the **Windows Azure Web Sites** service by creating a simple [ASP.NET MVC 4](http://www.asp.net/mvc/mvc4) application, which uses scaffolding to automatically generate the baseline of your application's CRUD (Create, Read, Update and Delete). Then, you will deploy it using Web Deploy from Microsoft Visual Studio 2012 and Git commit.
 
-Starting from a simple model class and without writing a single line of code, you will create a controller that will contain all the CRUD operations, as well as the all the necessary views. After publishing and running the solution, you will have the application database generated in your SQL Database server, together with the MVC logic and views for data manipulation.
+Starting from a simple model class and without writing a single line of code, you will create a controller that will contain all the CRUD operations, as well as all the necessary views. After publishing and running the solution, you will have the application database generated in your SQL Database server, together with the MVC logic and views for data manipulation.
 
 <a name="Objectives"></a>
 ### Objectives ###
@@ -29,8 +29,6 @@ The following is required to complete this hands-on lab:
 - [Microsoft Visual Studio 2012](http://msdn.microsoft.com/vstudio/products/)
 - [GIT Version Control System](http://git-scm.com/download)
 - A Windows Azure subscription with the Web Sites Preview enabled - [sign up for a free trial](http://aka.ms/WATK-FreeTrial)
-
-> **Note:** This lab was designed to use Windows 8 Operating System.
 
 <a name="Setup"></a>
 ### Setup ###
@@ -79,11 +77,11 @@ In this section, you will create a simple ASP.NET MVC 4 web application, using M
 
 	_Choosing Internet Application_
 
-1. In the Solution Explorer, right-click **Models** and select **Add | Class** to create a person class (POCO). Name it _Person.cs_ and click **Add**.
+1. In the Solution Explorer, right-click **Models** and select **Add | Class** to create a customer class (POCO). Name it _Customer.cs_ and click **Add**.
 
-1. Open the **Person** class and insert the following three properties.
+1. Open the **Customer** class and insert the following properties.
 
-	<!-- mark:10-14 -->
+	<!-- mark:10-25 -->
 	````C#
 	using System;
 	using System.Collections.Generic;
@@ -92,13 +90,23 @@ In this section, you will create a simple ASP.NET MVC 4 web application, using M
 
 	namespace MVC4Sample.Web.Models
 	{
-		public class Person
+		public class Customer
 		{
-			public int PersonID { get; set; }
+			public int CustomerId { get; set; }
 
-			public string FirstName { get; set; }
+			public string Name { get; set; }
 
-			public string LastName { get; set; }
+			public string Phone { get; set; }
+
+			public string Address { get; set; }
+
+			public string Company { get; set; }
+
+			public string Title { get; set; }
+
+			public string Email { get; set; }
+
+			public string Image { get; set; }
 		}
 	}
 	````
@@ -107,53 +115,57 @@ In this section, you will create a simple ASP.NET MVC 4 web application, using M
 
 1. In the Solution Explorer, right-click the **Controllers** folder and select **Add | Controller**. 
 
-1. Name the controller _PersonController_ and complete the **Scaffolding options** with the following values.	
+1. Name the controller _CustomerController_ and complete the **Scaffolding options** with the following values.	
 	- In the **Template** drop-down list, select the **MVC Controller with read/write actions and views, using Entity Framework** option.
-	- In the **Model class** drop-down list, select the **Person** class.
-	- In the **Data Context class** list, select **\<New data context...\>**. In the dialog box displayed, replace the data context class type with **MVC4Sample.Web.Models.PersonContext** and click **OK**.
-	- In the **Views** drop-down list, make sure that **Razor** is selected.
+	- In the **Model class** drop-down list, select the **Customer** class.
+	- In the **Data Context class** list, select **\<New data context...\>**. In the dialog box displayed, replace the data context class type with **MVC4Sample.Web.Models.CustomerContext** and click **OK**.
+	- In the **Views** drop-down list, make sure that **Razor (CSHTML)** is selected.
 
-	![Adding the Person controller with scaffolding](Images/add-person-controller.png?raw=true "Adding the Person controller with scaffolding")
+	![Adding the Customer controller with scaffolding](Images/add-customer-controller.png?raw=true "Adding the Customer controller with scaffolding")
 
-	_Adding the Person controller with scaffolding_
+	_Adding the Customer controller with scaffolding_
 	
-1. Click **Add** to create the new controller for **Person** with scaffolding. You have generated the controller actions as well as the views. 
+1. Click **Add** to create the new controller for **Customer** with scaffolding. You have generated the controller actions as well as the views. 
 		
-	![After creating the Person controller with scaffolding ](Images/person-scaffolding.png?raw=true "After creating the Person controller with scaffolding")
+	![After creating the Customer controller with scaffolding ](Images/customer-scaffolding.png?raw=true "After creating the Customer controller with scaffolding")
 
-	_After creating the Person controller with scaffolding_
+	_After creating the Customer controller with scaffolding_
 
-1. Open the **PersonController.cs** file in the **Controllers** folder. Notice that the CRUD action methods have been generated automatically. 
+1. Open the **CustomerController.cs** file in the **Controllers** folder. Notice that the CRUD action methods have been generated automatically. 
 
 	````C#
 	//
-	// POST: /Person/Create
+	// POST: /Customer/Create
+
 	[HttpPost]
-	public ActionResult Create(Person person)
+	[ValidateAntiForgeryToken]
+	public ActionResult Create(Customer customer)
 	{
-	     if (ModelState.IsValid)
-	     {
-	          db.People.Add(person);
-	          db.SaveChanges();
-	          return RedirectToAction("Index");
-	     }
-	     return View(person);
+		if (ModelState.IsValid)
+		{
+			 db.Customers.Add(customer);
+			 db.SaveChanges();
+			 return RedirectToAction("Index");
+		}
+
+		return View(customer);
 	}
-	
+
 	//
-	// GET: /Person/Edit/5
+	// GET: /Customer/Edit/5
+
 	public ActionResult Edit(int id = 0)
 	{
-	     Person person = db.People.Find(id);
-	     if (person == null)
-	     { 
-	          return HttpNotFound();
-	     }
-	     return View(person);
+		Customer customer = db.Customers.Find(id);
+		if (customer == null)
+		{
+			 return HttpNotFound();
+		}
+		return View(customer);
 	}
 	````
 
-	_Inside the Person controller_
+	_Inside the Customer controller_
 
 1. Do not close Visual Studio.
 
@@ -195,7 +207,7 @@ In this exercise, you will create a new web site in the Windows Azure Management
 
 	> ![Web Site Modes](Images/web-site-modes.png?raw=true "Web Site Modes")
 
-	> If you are using **Shared** or **Reserved** mode, you will be able to manage custom domains for your Web Site. To do so, go to the **Configure** menu of your Web Site and click **Manage Domains**.
+	> If you are using **Shared** or **Reserved** mode, you will be able to manage custom domains for your Web Site. To do so, go to the **Configure** menu of your Web Site and under _domain names_ click **Manage Domains**.
 
 	> ![Manage Domains](Images/manage-domains.png?raw=true "Manage Domains")
 
@@ -217,7 +229,7 @@ In this exercise, you will create a new web site in the Windows Azure Management
 	
 	_Opening the Web Site management pages_
 
-1. In the **Dashboard** page, under the **quick glance** section, click the **Download publish profile** link.
+1. In the **Dashboard** page, under the **quick glance** section, click the **Download the publish profile** link.
 
 	> **Note:** The _publish profile_ contains all of the information required to publish a web application to a Windows Azure website for each enabled publication method. The publish profile contains the URLs, user credentials and database strings required to connect to and authenticate against each of the endpoints for which a publication method is enabled. **Microsoft WebMatrix 2**, **Microsoft Visual Web Developer** and **Microsoft Visual Studio 2012** support reading publish profiles to automate configuration of these programs for publishing web applications to Windows Azure websites. 
 
@@ -276,13 +288,13 @@ Do not create the database yet, as it will be created by Entity Framework when r
 
 	_Validating connection_
 
-1. In the **Settings** page, under the **Databases** section, click the button next to the **PersonContext** textbox.
+1. In the **Settings** page, under the **Databases** section, click the button next to the **CustomerContext** textbox.
 
 	![Web deploy configuration](Images/web-deploy-configuration.png?raw=true "Web deploy configuration")
 
 	_Web deploy configuration_
 
-1. Configure the database connection as follows:
+1. Configure the database connection as follows and then click **OK**:
 	* In the **Server name**, type your SQL Database server URL. This is the domain name portion of the **MANAGE URL** copied earlier (for example, given _https://[yourserver].database.windows.net/_ as the MANAGE URL, enter _[yourserver].database.windows.net_).
 	* In **User name**, type your server administrator login name.
 	* In **Password**, type your server administrator login password.
@@ -292,13 +304,7 @@ Do not create the database yet, as it will be created by Entity Framework when r
 
 	_Configuring destination connection string_
 
-1. Then, click **OK**. When prompted to create the database, click **Yes**.
-
-	![Creating the database](Images/creating-the-database.png?raw=true "Creating the database string")
-
-	_Creating the database_
-
-1. Copy the connection string value from **PersonContext** to use it later. Then click **Next**.
+1. Copy the connection string value from **CustomerContext** to use it later. Then click **Next**.
 
 	![Connection string pointing to SQL Database](Images/sql-database-connection-string.png?raw=true "Connection string pointing to SQL Database")
 
@@ -316,11 +322,11 @@ Do not create the database yet, as it will be created by Entity Framework when r
 
 	_Application published to Windows Azure_
 
-1. Go to **/Person** to verify that the Persons views are working as expected. You can try adding a new Person to verify it is successfully saved to the database.
+1. Go to **/Customer** to verify that the Customers views are working as expected. You can try adding a new Customer to verify it is successfully saved to the database.
 
 	![Application Running](Images/application-running.png?raw=true "Application Running")
 
-	_Add Person view_
+	_Add Customer view_
 
 ---
 
@@ -329,53 +335,24 @@ Do not create the database yet, as it will be created by Entity Framework when r
 
 In this exercise you will publish again the web application you created in exercise 1, but this time using Git.
 
-If you did not executed exercise 1 you can still perform this exercise by deploying the site in the **Source\Assets** folder of this lab.
+> **Note:** If you did not executed exercise 1 you can still perform this exercise by deploying the site located in the **Source\Assets** folder of this lab.
 
-<a name="Ex2Task1"></a>
-#### Task 1 – Creating a New Web Site from the Windows Azure Portal ####
+<a name="Ex2Task1"></a>  
+#### Task 1 – Setting up Git Publishing ####
 
-1. Go to the [Windows Azure Management Portal](https://manage.windowsazure.com/) and sign in using your Microsoft Account credentials associated with your subscription.
+1. Go back to the Windows Azure Management Portal. In the **Web Sites** section, locate the web site you created in the previous exercise and open its dashboard. To do this, click the web site's **Name**. 
 
-	![Log on to Windows Azure portal](Images/login.png?raw=true "Log on to Windows Azure portal")
+1. Under the quick glance section, click **Set up deployment from source control** link.
 
-	_Log on to Windows Azure Management Portal_
+	![Set up deployment from source control](Images/set-up-git-publishing.png?raw=true "Set up deployment from source control")
 
-1. Click **New** on the command bar.
+	_Set up deployment from source control_
 
-	![Creating a new Web Site](Images/new-website.png?raw=true "Creating a new Web Site")
+1. Once the **Set up Deployment** window is displayed, select **Local Git repository** and click **Next**.
 
-	_Creating a new Web Site_
+	![Set up Git Deployment](Images/selecting-git-source-control.png?raw=true "Set up Git Deployment")
 
-1. Click **Compute**, **Web Site** and then **Quick Create**. Provide an available URL for the new web site and click **Create Web Site**.
-
-	> **Note:** A Windows Azure Web Site is the host for a web application running in the cloud that you can control and manage. The Quick Create option allows you to deploy a completed web application to the Windows Azure Web Site from outside the portal. It does not include steps for setting up a database.
-
-	![Creating a new Web Site using Quick Create](Images/quick-create.png?raw=true "Creating a new Web Site using Quick Create")
-
-	_Creating a new Web Site using Quick Create_
-
-1. Wait until the new web site is created.
-
-1. Once the web site is created, click the link under the **URL** column. Check that the new web site is working.
-
-	![Browsing to the new web site](Images/navigate-website.png?raw=true "Browsing to the new web site")
-
-	_Browsing to the new web site_
-
-	![Web site running](Images/website-working.png?raw=true "Web site running")
-
-	_Web site running_
-
-<a name="Ex2Task2"></a>  
-#### Task 2 – Setting up Git Publishing ####
-
-1. Go back to the Windows Azure Management Portal. In the **Web Sites** section, locate the web site you created in the previous task and open its dashboard. To do this, click the web site's **Name**. 
-
-1. Under the quick glance section, click **Set up Git publishing** link.
-
-	![Set up Git publishing](Images/set-up-git-publishing.png?raw=true "Set up Git publishing")
-
-	_Set up Git publishing_
+	_Set up Git Deployment_
 
 1. A message indicating that your Git repository is being created will appear.
 
@@ -391,29 +368,31 @@ If you did not executed exercise 1 you can still perform this exercise by deploy
 
 1. Copy the **Git URL** value. You will use it later in this exercise.
 
-<a name="Ex2Task3"></a>  
-#### Task 3 – Pushing the Application to Widows Azure using Git ####
+<a name="Ex2Task2"></a>  
+#### Task 2 – Pushing the Application to Windows Azure using Git ####
 
 1. Open the solution you have obtained in [exercise 1](#Exercise1) with Visual Studio. Alternatively, you can open the **MVC4Sample.Web** solution located in the **Source\Assets** folder of this lab.
 
 1. Press **CTRL+SHIFT+B** to build the solution and download the NuGet package dependencies.
 
-1. Open Web.config and update the **PersonContext** connection string using the one obtained from [Exercise 1 - Task 3](#Ex1Task3). You can also use the following connection string replacing the placeholders.
+1. Open Web.config and update the **CustomerContext** connection string using the one obtained from [Exercise 1 - Task 3](#Ex1Task3). You can also use the following connection string replacing the placeholders.
 
 	````XML
 	<connectionStrings>
 	 ...
-	 <add name="PersonContext" connectionString="Data Source=tcp:{SERVER_URL};Initial Catalog=MVC4SampleDB;User ID={SERVER_ADMIN_LOGIN};Password={PASSWORD}"
+	 <add name="CustomerContext" connectionString="Data Source=tcp:{SERVER_URL};Initial Catalog=MVC4SampleDB;User ID={SERVER_ADMIN_LOGIN};Password={PASSWORD}"
 		providerName="System.Data.SqlClient" />
 	</connectionStrings>
 	````
 
 1. Open a new **Git Bash** console and insert the following commands. Update the _[YOUR-APPLICATION-PATH]_ placeholder with the path of the MVC 4 solution you've created in [Exercise 1](#Exercise1). 
 	
-	<!-- mark:1-4 -->
+	<!-- mark:1-6 -->
 	````CommandPrompt
 	cd "[YOUR-APPLICATION-PATH]"
 	git init
+	git config --global user.email "{username@example.com}"
+	git config --global user.name "{your-user-name}"
 	git add .
 	git commit -m "Initial commit"
 	````
@@ -434,7 +413,7 @@ If you did not executed exercise 1 you can still perform this exercise by deploy
 
 	_Pushing to Windows Azure_
 
-	> **Note:** When you deploy content to the FTP host or GIT repository of a Windows Azure website you must authenticate using **deployment credentials** that you create from the website’s **Quick Start** or **Dashboard** management pages.  If you don't know your deployment credentials you can easily reset them using the management portal. Open the web site **Dashboard** page and click the **Reset deployment credentials** link. Provide a new password and click Ok. Deployment credentials are valid for use with all Windows Azure websites associated with your subscription. 
+	> **Note:** When you deploy content to the FTP host or GIT repository of a Windows Azure website you must authenticate using **deployment credentials** that you create from the website’s **Quick Start** or **Dashboard** management pages.  If you don't know your deployment credentials you can easily reset them using the management portal. Open the web site **Dashboard** page and click the **Reset your deployment credentials** link. Provide a new password and click **OK**. Deployment credentials are valid for use with all Windows Azure websites associated with your subscription. 
 
 1. In order to verify the web site was successfully pushed to Windows Azure, go back to the **Windows Azure Management Portal** and click **Web Sites**.
 
@@ -458,11 +437,11 @@ If you did not executed exercise 1 you can still perform this exercise by deploy
 
 	_Application Running in Windows Azure_
 	
-1. Go to **/Person** to verify that the Persons views are working as expected. You can try adding a new Person to verify it is successfully saved to the database.
+1. Go to **/Customer** to verify that the Customers views are working as expected. You can try adding a new Customer to verify it is successfully saved to the database.
 
 	![Application Running](Images/application-running.png?raw=true "Application Running")
 
-	_Add Person view_
+	_Add Customer view_
 
 ---
 <a name="Summary"></a>
