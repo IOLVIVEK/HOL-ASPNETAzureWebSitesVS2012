@@ -65,7 +65,7 @@ In this section, you will create a simple ASP.NET MVC 4 web application, using M
 
 	_Creating a new project_
 
-1. Create a new **ASP.NET MVC 4 Web Application** using **.NET Framework 4.5** and name it **MVC4Sample.Web**.
+1. Create a new **ASP.NET MVC 4 Web Application** using **.NET Framework 4.5**, **C#** and name it **MVC4Sample.Web**.
 
 	![Creating a new ASP.NET MVC 4 Web Application](Images/mvc4-sample.png?raw=true "Creating a new ASP.NET MVC 4 Web Application")
 
@@ -335,7 +335,7 @@ Do not create the database yet, as it will be created by Entity Framework when r
 
 In this exercise you will publish again the web application you created in exercise 1, but this time using Git.
 
-> **Note:** If you did not executed exercise 1 you can still perform this exercise by deploying the site located in the **Source\Assets** folder of this lab.
+> **Note:** If you did not execute exercise 1 you can still perform this exercise by deploying the site located in the **Source\Assets** folder of this lab.
 
 <a name="Ex2Task1"></a>  
 #### Task 1 – Setting up Git Publishing ####
@@ -354,7 +354,9 @@ In this exercise you will publish again the web application you created in exerc
 
 	_Set up Git Deployment_
 
-1. A message indicating that your Git repository is being created will appear.
+1. A message indicating that your Git repository is being created will appear. 
+
+	> **Note:** You may be prompted for username and password.
 
 	![Creating Git Repository](Images/creating-git-repository.png?raw=true "Creating Git Repository")
 
