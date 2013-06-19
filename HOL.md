@@ -253,7 +253,7 @@ Do not create the database yet, as it will be created by Entity Framework when r
 
 	_SQL Database Server Dashboard_
 
-1. In the next task, you will test the database connection from Visual Studio. For that reason, you need to include your local IP address in the server's list of **Allowed IP Addresses**. To do that, click **Configure**, and then click the ![add-client-ip-address-ok-button](Images/add-client-ip-address-ok-button.png?raw=true) button next to the the IP address labeled **CURRENT CLIENT IP ADDRESS**.
+1. In the next task, you will test the database connection from Visual Studio. For that reason, you need to include your local IP address in the server's list of **Allowed IP Addresses**. To do that, click **Configure**, and then click the ![add-client-ip-address-ok-button](Images/add-client-ip-address-ok-button.png?raw=true) button next to the IP address labeled **CURRENT CLIENT IP ADDRESS**.
 
 	![Adding Client IP Address](Images/add-client-ip-address.png?raw=true)
 
