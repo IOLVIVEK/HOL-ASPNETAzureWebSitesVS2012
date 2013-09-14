@@ -28,7 +28,7 @@ The following is required to complete this hands-on lab:
 
 - [Microsoft Visual Studio 2012](http://msdn.microsoft.com/vstudio/products/)
 - [GIT Version Control System](http://git-scm.com/download)
-- A Windows Azure subscription with the Web Sites Preview enabled - [sign up for a free trial](http://aka.ms/WATK-FreeTrial)
+- A Windows Azure subscription - [sign up for a free trial](http://aka.ms/WATK-FreeTrial)
 
 <a name="Setup"></a>
 ### Setup ###
