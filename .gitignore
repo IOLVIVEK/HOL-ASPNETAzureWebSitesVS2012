@@ -53,3 +53,5 @@ packages
 *.InstallLog
 DC.exe
 
+
+entry.xml
